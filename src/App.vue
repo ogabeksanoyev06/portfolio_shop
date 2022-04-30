@@ -1,32 +1,40 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+	<div id="app">
+		<v-header />
+		<page-loader></page-loader>
+		<router-view></router-view>
+	</div>
 </template>
-
+<script>
+import vHeader from './components/v-header.vue';
+import PageLoader from './components/PageLoader.vue';
+export default {
+	name: 'app',
+	components: { vHeader, PageLoader },
+};
+</script>
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.quantity {
+	display: flex;
+	justify-content: space-between;
+	background: #efefef;
+	border-radius: 4px;
+	padding: 10px 15px;
+	min-width: 100px;
+}
+svg:hover path {
+	fill: #000000;
 }
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+#app {
+	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+	color: #2c3e50;
+}
+a {
+	text-decoration: none;
+}
+ul {
+	list-style: none;
+	margin-bottom: 0 !important;
 }
 </style>
