@@ -8,7 +8,7 @@
 					<div class="cart_item_img">
 						<img :src="cart_item_data.image" :alt="cart_item_data.category" />
 					</div>
-					<div class="cart_item_close d-flex d-md-none">
+					<div class="cart_item_close d-flex d-md-none" @click="removeCartItem">
 						<svg
 							width="14"
 							height="14"
@@ -77,9 +77,9 @@ export default {
 		incrementItem() {
 			this.$emit('increment');
 		},
-		removeCartItem(){
+		removeCartItem() {
 			this.$emit('remove');
-		}
+		},
 	},
 	mounted() {
 		this.$set(this.cart_item_data, 'quantity', 1);
