@@ -1,5 +1,5 @@
 <template>
-	<div class="v-main-wrapper container">
+	<div class="v-main-wrapper mt-5 container">
 		<v-catalog></v-catalog>
 	</div>
 </template>

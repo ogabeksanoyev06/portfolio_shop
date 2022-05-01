@@ -2,7 +2,7 @@
 	<div class="v-catalog row">
 		<page-loader v-if="PRODUCTS == ''"></page-loader>
 		<div class="col-md-3">fdfdf</div>
-		<div class="col-md-9 d-flex flex-wrap">
+		<div class="col-md-9 d-flex flex-wrap justify-content-center">
 			<v-catalog-item
 				v-for="product in PRODUCTS"
 				:key="product.id"
