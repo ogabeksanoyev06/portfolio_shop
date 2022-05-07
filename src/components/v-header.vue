@@ -4,7 +4,7 @@
 			<div class="container">
 				<div class="v-header">
 					<div class="d-flex align-items-center justify-content-between">
-						<div class="v-header-logo">
+						<div class="v-header-logo" @click="gotoHome('home')">
 							<img src="@/assets/cart-logo/SHOPPE.png" alt="" />
 						</div>
 						<!-- desktop -->
@@ -124,6 +124,11 @@ export default {
 	},
 	methods: {
 		...mapActions(['ITEM_HEADER']),
+		gotoHome(home) {
+			if (home == 'home') {
+				this.$router.push('/');
+			}
+		},
 	},
 	mounted() {
 		console.log(this.ITEMS);
@@ -142,6 +147,7 @@ export default {
 }
 .v-header-logo {
 	flex: 1;
+	cursor: pointer;
 }
 .v-header {
 	border-bottom: 1px solid #e6e6e6;

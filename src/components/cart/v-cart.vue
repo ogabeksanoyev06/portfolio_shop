@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<p class="cart-title mb-5">Shopping Cart</p>
-		<div class="row">
+		<div class="row" v-if="CART != ''">
 			<div class="col-md-7">
 				<v-cart-item
 					v-for="(item, i) in cart_data"

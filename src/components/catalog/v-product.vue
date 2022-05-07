@@ -55,11 +55,11 @@
 						</p>
 						<div class="d-flex align-items-center justify-content-between mb-5">
 							<div class="quantity">
-								<span style="cursor: pointer">-</span>
+								<span style="cursor: pointer" @click="decrementItem">-</span>
 								<span class="mx-1" style="cursor: not-allowed">{{
 									PRODUCT.quantity
 								}}</span>
-								<span style="cursor: pointer">+</span>
+								<span style="cursor: pointer" @click="incrementItem">+</span>
 							</div>
 							<div class="cart_btn">
 								<button @click="addToCart">ADD TO CART</button>
@@ -197,10 +197,23 @@ export default {
 	computed: {
 		...mapGetters(['PRODUCT', 'CART']),
 	},
+	created(){
+		
+	},
 	methods: {
 		...mapActions(['ADD_TO_PRODUCT', 'ADD_TO_CART']),
 		addToCart() {
 			this.$router.push('/shop/cart');
+		},
+		decrementItem() {
+			if (this.PRODUCT.quantity > 1) {
+				this.PRODUCT.quantity--;
+			}
+		},
+		incrementItem() {
+			if (this.PRODUCT.quantity < 20) {
+				this.PRODUCT.quantity++;
+			}
 		},
 	},
 	mounted() {
@@ -209,7 +222,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .cart_btn {
 	display: flex;
 	flex: 1;

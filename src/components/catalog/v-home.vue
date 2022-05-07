@@ -12,7 +12,9 @@ export default {
 		return {};
 	},
 	computed: {},
-	methods: {},
+	methods: {
+	
+	},
 	mounted() {},
 };
 </script>

@@ -39,6 +39,12 @@ export default {
 		addToCart(data) {
 			this.ADD_TO_CART(data);
 		},
+		decrementItem() {
+			this.$emit('decrement');
+		},
+		incrementItem() {
+			this.$emit('increment');
+		},
 	},
 	mounted() {
 		this.GET_PRODUCTS();
