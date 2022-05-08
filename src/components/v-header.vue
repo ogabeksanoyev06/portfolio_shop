@@ -60,7 +60,7 @@
 							</ul>
 						</div>
 						<!-- mobile -->
-						<div class="v-header-mobile-items d-flex align-items-center">
+						<div class="v-header-mobile-items">
 							<ul class="d-flex d-md-none">
 								<li>
 									<router-link
@@ -97,11 +97,49 @@
 								<li
 									class="menu_logo my-auto"
 									:class="{ toogleMenu: btnActive }"
-									@click="btnActive = !btnActive"
+									@click="(btnActive = !btnActive), (menuActive = !menuActive)"
 								>
 									<div></div>
 									<div></div>
 									<div></div>
+								</li>
+							</ul>
+							<ul class="mobile-items" :class="{ toogleItems: menuActive }">
+								<li
+									class="mobile-item"
+									v-for="(mobile_data, i) in mobile_datas"
+									:key="i"
+								>
+									<router-link :to="{ name: mobile_data.link }">{{
+										mobile_data.title
+									}}</router-link>
+								</li>
+								<div class="hr mt-4 mb-3"></div>
+								<li class="mobile-item d-flex align-items-center">
+									<router-link
+										:to="{ name: 'home' }"
+										class="d-flex align-items-center"
+									>
+										<img
+											class="me-2"
+											src="@/assets/cart-logo/acaunt.png"
+											alt=""
+										/>
+										<span>My Acaunt</span>
+									</router-link>
+								</li>
+								<li class="mobile-item">
+									<router-link
+										:to="{ name: 'home' }"
+										class="d-flex align-items-center"
+									>
+										<img
+											class="me-2"
+											src="@/assets/cart-logo/Icon color.png"
+											alt=""
+										/>
+										<span>Logout</span>
+									</router-link>
 								</li>
 							</ul>
 						</div>
@@ -117,7 +155,19 @@ export default {
 	name: 'v-header',
 	props: {},
 	data() {
-		return { btnActive: false };
+		return {
+			btnActive: false,
+			menuActive: true,
+			mobile_datas: [
+				{ title: 'Home', link: 'home', id: 0 },
+				{ title: 'Shop', link: 'shop', id: 1 },
+				{ title: 'About', link: 'home', id: 2 },
+				{ title: 'Blog', link: 'blog', id: 3 },
+				{ title: 'Help', link: 'home', id: 4 },
+				{ title: 'Contact', link: 'home', id: 5 },
+				{ title: 'Search', link: 'home', id: 6 },
+			],
+		};
 	},
 	computed: {
 		...mapGetters(['ITEMS', 'CART']),
@@ -130,9 +180,7 @@ export default {
 			}
 		},
 	},
-	mounted() {
-		console.log(this.ITEMS);
-	},
+	mounted() {},
 };
 </script>
 <style scoped>
@@ -200,7 +248,6 @@ export default {
 }
 .v-header-mobile-items .menu_logo {
 	position: relative;
-	background-color: #efefef;
 	width: 30px;
 	height: 30px;
 	border-radius: 5px;
@@ -243,5 +290,38 @@ export default {
 	width: 20px;
 	height: 1px;
 	transform: translateY(0px) rotate(315deg);
+}
+.v-header-mobile-items .mobile-items {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 61px;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	transform: translateX(0);
+	height: 100vh !important;
+	transition: transform 0.5s;
+	transition-timing-function: ease;
+	transition-timing-function: cubic-bezier(0.5, 1.6, 0.4, 0.7);
+	padding: 0 !important;
+}
+.hr {
+	margin: 0 20px;
+	border-bottom: 1.5px solid #e6e6e6;
+	line-height: normal !important;
+}
+.v-header-mobile-items .mobile-items .mobile-item {
+	font-size: 20px;
+	line-height: 35px;
+	margin-bottom: 5px;
+	padding-left: 10px;
+	color: #000;
+}
+.v-header-mobile-items .mobile-items .mobile-item a {
+	font-weight: 500 !important;
+}
+.v-header-mobile-items .mobile-items.toogleItems {
+	transform: translateX(-100%);
 }
 </style>
