@@ -25,7 +25,7 @@ const routes = [
 		component: () => import('@/components/catalog/v-main-wrapper.vue'),
 	},
 	{
-		path: '/shop/product',
+		path: '/shop/product/:id',
 		name: 'product',
 		component: () => import('@/components/catalog/v-product.vue'),
 	},

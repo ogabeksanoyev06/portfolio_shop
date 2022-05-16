@@ -1,9 +1,6 @@
 <template>
 	<div class="v-cart mt-5 container">
-		<div
-			v-if="CART == ''"
-			class="d-flex align-items-center justify-content-center container"
-		>
+		<div class="d-flex align-items-center justify-content-center container">
 			<div
 				style="min-height: 80vh"
 				class="d-flex flex-column align-items-center text-center justify-content-center"
@@ -26,61 +23,31 @@
 			</div>
 		</div>
 		<p class="cart-title mb-5">Shopping Cart</p>
-		<div class="row" v-if="CART != ''">
+		<div class="row">
 			<div class="col-md-7">
-				<v-cart-item
-					v-for="(item, i) in cart_data"
-					:key="i"
-					:cart_item_data="item"
-					@decrement="decrement(i)"
-					@increment="increment(i)"
-					@remove="remove(i)"
-				></v-cart-item>
+				<v-cart-item></v-cart-item>
 			</div>
 			<div class="col-md-5">dddwdw</div>
 		</div>
 	</div>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import vCartItem from './v-cart-item.vue';
 export default {
 	name: 'v-cart',
 	components: {
 		vCartItem,
 	},
-	props: {
-		cart_data: {
-			type: Array,
-			default() {
-				return [];
-			},
-		},
-	},
+
 	data() {
 		return {};
 	},
-	computed: {
-		...mapGetters(['CART']),
+	computed: {},
+
+	methods: {},
+	mounted() {
+		this.GET_CART_PRODUCT();
 	},
-	methods: {
-		...mapActions([
-			'ADD_TO_CART',
-			'INCREMENT_CART_ITEM',
-			'DECREMENT_CART_ITEM',
-			'REMOVE_CART_ITEM',
-		]),
-		decrement(i) {
-			this.DECREMENT_CART_ITEM(i);
-		},
-		increment(i) {
-			this.INCREMENT_CART_ITEM(i);
-		},
-		remove(i) {
-			this.REMOVE_CART_ITEM(i);
-		},
-	},
-	mounted() {},
 };
 </script>
 <style scoped>

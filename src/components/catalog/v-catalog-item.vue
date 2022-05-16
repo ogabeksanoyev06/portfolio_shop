@@ -5,11 +5,7 @@
 				<div class="content_overlay"></div>
 				<div class="content-details">
 					<div class="d-flex align-items-center justify-content-center">
-						<img
-							@click="addToCart"
-							src="@/assets/cart-logo/shopping-cart 1 (1).png"
-							alt=""
-						/>
+						<img src="@/assets/cart-logo/shopping-cart 1 (1).png" alt="" />
 						<img
 							class="mx-2 mx-md-5"
 							src="@/assets/cart-logo/Group.png"
@@ -27,8 +23,8 @@
 			<div class="card_info">
 				<span class="title">{{ titleSlice(product_data.title) }}</span>
 				<span class="price">$ {{ product_data.price }}</span>
-				<router-link :to="{ name: 'product' }">
-					<button class="btn_more" @click="addProduct">More</button>
+				<router-link :to="{ name: 'product', params: { id: product_data.id } }">
+					<button class="btn_more">More</button>
 				</router-link>
 			</div>
 		</div>
@@ -50,13 +46,7 @@ export default {
 	},
 	computed: {},
 	methods: {
-		addProduct() {
-			this.$emit('addToProduct', this.product_data);
-		},
-		addToCart() {
-			this.$emit('addToCart', this.product_data);
-		},
-
+	
 		titleSlice(text) {
 			return text.slice(0, 15) + '...';
 		},

@@ -1,8 +1,9 @@
 <template>
 	<div class="v-product">
-		<div class="container">
+		<div class="container" v-if="product">
+			<page-loader v-if="loading && !product" />
 			<div class="row">
-				<div class="col-md-6">frfrfrfr</div>
+				<div class="col-md-6">kokook</div>
 				<div class="col-md-6">
 					<div class="product_content">
 						<span
@@ -14,7 +15,7 @@
 								margin-bottom: 15px;
 							"
 						>
-							{{ PRODUCT.title }}
+							{{ product.title }}
 						</span>
 						<span
 							style="
@@ -26,7 +27,7 @@
 								display: block;
 								margin-bottom: 30px;
 							"
-							>$ {{ PRODUCT.price }}
+							>$ {{ product.price }}
 						</span>
 						<div class="d-flex align-items-center mb-3">
 							<el-rate disabled show-scores disabled-void-color="#000">
@@ -51,18 +52,16 @@
 								margin-bottom: 30px;
 							"
 						>
-							{{ PRODUCT.description }}
+							{{ product.description }}
 						</p>
 						<div class="d-flex align-items-center justify-content-between mb-5">
 							<div class="quantity">
 								<span style="cursor: pointer" @click="decrementItem">-</span>
-								<span class="mx-1" style="cursor: not-allowed">{{
-									PRODUCT.quantity
-								}}</span>
+								<span class="mx-1" style="cursor: not-allowed">{{ 1 }}</span>
 								<span style="cursor: pointer" @click="incrementItem">+</span>
 							</div>
 							<div class="cart_btn">
-								<button @click="addToCart">ADD TO CART</button>
+								<button>ADD TO CART</button>
 							</div>
 						</div>
 						<div class="d-flex align-items-center mb-5 icons">
@@ -177,48 +176,90 @@
 							>Categories:
 							<span
 								style="color: #707070; font-size: 16px; line-height: 27px"
-								>{{ PRODUCT.category }}</span
+								>{{ product.category }}</span
 							>
 						</span>
 					</div>
 				</div>
 			</div>
+
+			<div class="vTabs">
+				<div class="vTabs_nav">
+					<div
+						class="vTabs_item"
+						v-for="(tab, index) in tabs"
+						:key="index"
+						:class="{ vTabs_item_active: index === activeTab }"
+						@click="setActive(index)"
+					>
+						{{ tab.title }}
+					</div>
+				</div>
+				<div class="tabs_content">
+					<div class="tab_pane" v-show="isActive(0)">
+						{{ product.description }}
+					</div>
+					<div class="tab_pane" v-show="isActive(1)">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+						veritatis rerum harum iusto odit neque! Deleniti nam ducimus,
+						aliquid voluptatibus praesentium sit animi soluta sequi cumque
+						fugit, laboriosam, libero rerum?
+					</div>
+					<div class="tab_pane" v-show="isActive(2)">tab3</div>
+				</div>
+			</div>
 		</div>
-	</div>
+	</div> 
 </template>
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import axios from 'axios';
+import PageLoader from '../PageLoader.vue';
 export default {
+	components: { PageLoader },
 	name: 'v-product',
 	props: {},
 	data() {
-		return {};
+		return {
+			product: null,
+			loading: true,
+			tabs: [
+				{ title: 'Description', content: 'Description' },
+				{ title: 'Aditional information', content: 'Aditional information' },
+				{ title: 'Reviews', content: 'Reviews' },
+			],
+			activeTab: 0,
+		};
 	},
-	computed: {
-		...mapGetters(['PRODUCT', 'CART']),
-	},
-	created(){
-		
+	computed: {},
+	async created() {
+		this.$route.params.id;
+		axios
+			.get(`https://fakestoreapi.com/products/${this.$route.params.id}`)
+			.then(res => {
+				this.product = res.data;
+				this.loading = false;
+			})
+			.finally(() => (this.loading = false));
 	},
 	methods: {
-		...mapActions(['ADD_TO_PRODUCT', 'ADD_TO_CART']),
-		addToCart() {
-			this.$router.push('/shop/cart');
+		setActive(tab) {
+			this.activeTab = tab;
+		},
+		isActive(tab) {
+			return this.activeTab === tab;
 		},
 		decrementItem() {
-			if (this.PRODUCT.quantity > 1) {
-				this.PRODUCT.quantity--;
+			if (this.product.quantity > 1) {
+				this.product.quantity--;
 			}
 		},
 		incrementItem() {
-			if (this.PRODUCT.quantity < 20) {
-				this.PRODUCT.quantity++;
+			if (this.product.quantity < 20) {
+				this.product.quantity++;
 			}
 		},
 	},
-	mounted() {
-		this.$set(this.PRODUCT, 'quantity', 1);
-	},
+	mounted() {},
 };
 </script>
 <style scoped>
@@ -244,5 +285,46 @@ export default {
 
 .icon_logo svg {
 	margin-right: 20px;
+}
+/* tab */
+.vTabs_nav {
+	display: flex;
+	position: relative;
+	margin-bottom: 40px;
+}
+.vTabs_nav::after {
+	content: '';
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: #d8d8d8;
+}
+.vTabs_nav .vTabs_item {
+	font-size: 20px;
+	font-weight: 400;
+	color: #707070;
+	margin-right: 30px;
+	cursor: pointer;
+}
+.vTabs_item_active {
+	color: #000 !important;
+	position: relative;
+}
+.vTabs_item_active::after {
+	content: '';
+	position: absolute;
+	bottom: -20px;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: #000;
+}
+.tabs_content .tab_pane {
+	font-size: 16px;
+	color: #707070;
+	line-height: 27px;
+	font-weight: 400;
 }
 </style>

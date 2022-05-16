@@ -6,7 +6,7 @@
 			>
 				<div class="d-flex justify-content-between w-0 w-md-100">
 					<div class="cart_item_img">
-						<img :src="cart_item_data.image" :alt="cart_item_data.category" />
+						<img src="" :alt="image" />
 					</div>
 					<div class="cart_item_close d-flex d-md-none" @click="removeCartItem">
 						<svg
@@ -25,14 +25,14 @@
 					</div>
 				</div>
 				<div class="cart_item_text mx-0 mx-md-3">
-					<p>{{ cart_item_data.title }}</p>
-					<p>{{ cart_item_data.description }}</p>
-					<p>$ {{ cart_item_data.price }}</p>
+					<p>ppp</p>
+					<p>sasasas</p>
+					<p>$ 32323</p>
 				</div>
 				<div class="quantity mb-md-0 mb-3 me-3">
 					<span style="cursor: pointer" @click="decrementItem">-</span>
 					<span class="mx-1" style="cursor: not-allowed">{{
-						cart_item_data.quantity
+						1
 					}}</span>
 					<span style="cursor: pointer" @click="incrementItem">+</span>
 				</div>
@@ -58,32 +58,13 @@
 <script>
 export default {
 	name: 'v-cart-item',
-	props: {
-		cart_item_data: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-	},
+	props: {},
 	data() {
 		return {};
 	},
 	computed: {},
-	methods: {
-		decrementItem() {
-			this.$emit('decrement');
-		},
-		incrementItem() {
-			this.$emit('increment');
-		},
-		removeCartItem() {
-			this.$emit('remove');
-		},
-	},
-	mounted() {
-		this.$set(this.cart_item_data, 'quantity', 1);
-	},
+	methods: {},
+	mounted() {},
 };
 </script>
 <style scoped>
