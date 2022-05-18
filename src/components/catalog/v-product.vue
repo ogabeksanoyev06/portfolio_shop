@@ -1,9 +1,43 @@
 <template>
-	<div class="v-product">
-		<div class="container" v-if="product">
-			<page-loader v-if="loading && !product" />
+	<div class="v-product" v-if="product">
+		<div class="container mt-3">
+			<page-loader v-if="loading" />
 			<div class="row">
-				<div class="col-md-6">kokook</div>
+				<div class="col-md-6">
+					<div
+						class="vImgTabs d-flex flex-column flex-md-row align-items-center"
+					>
+						<div
+							class="vImgTabs_nav me-2 d-flex flex-row justify-content-between flex-md-column"
+						>
+							<div
+								class="vImgTabs_item"
+								v-for="(tabImage, i) in tabImages"
+								:key="i"
+								:class="{ vTabsImg_item_active: i === activeTabImg }"
+								@click="setActiveImg(i)"
+							>
+								<div class="item_img">
+									<img :src="product.image" alt="" />
+									{{ tabImage.id }}
+								</div>
+							</div>
+						</div>
+						<div class="vImgTabContent">
+							<div
+								class="tab_pane_img"
+								v-for="(tabImage, i) in tabImages"
+								:key="i"
+								v-show="isActiveImg(i)"
+							>
+								<div class="pane_img">
+									<img :src="product.image" alt="" />
+									<span>{{ tabImage.id }}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="col-md-6">
 					<div class="product_content">
 						<span
@@ -209,7 +243,7 @@
 				</div>
 			</div>
 		</div>
-	</div> 
+	</div>
 </template>
 <script>
 import axios from 'axios';
@@ -221,25 +255,32 @@ export default {
 	data() {
 		return {
 			product: null,
-			loading: true,
+			loading: Boolean,
 			tabs: [
 				{ title: 'Description', content: 'Description' },
 				{ title: 'Aditional information', content: 'Aditional information' },
 				{ title: 'Reviews', content: 'Reviews' },
 			],
+			tabImages: [
+				{ id: 0, src: 'https://via.placeholder.com/300x300' },
+				{ id: 1, src: 'https://via.placeholder.com/300x300' },
+				{ id: 2, src: 'https://via.placeholder.com/300x300' },
+				{ id: 3, src: 'https://via.placeholder.com/300x300' },
+			],
 			activeTab: 0,
+			activeTabImg: 0,
 		};
 	},
 	computed: {},
 	async created() {
 		this.$route.params.id;
+		this.loading = true;
 		axios
 			.get(`https://fakestoreapi.com/products/${this.$route.params.id}`)
 			.then(res => {
 				this.product = res.data;
 				this.loading = false;
-			})
-			.finally(() => (this.loading = false));
+			});
 	},
 	methods: {
 		setActive(tab) {
@@ -247,6 +288,12 @@ export default {
 		},
 		isActive(tab) {
 			return this.activeTab === tab;
+		},
+		setActiveImg(tabImg) {
+			this.activeTabImg = tabImg;
+		},
+		isActiveImg(tabImg) {
+			return this.activeTabImg === tabImg;
 		},
 		decrementItem() {
 			if (this.product.quantity > 1) {
@@ -326,5 +373,62 @@ export default {
 	color: #707070;
 	line-height: 27px;
 	font-weight: 400;
+}
+.vImgTabs_item {
+	width: 100px;
+	height: 100px;
+	padding: 10px;
+	border: 1px solid #d8d8d8;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+.vImgTabs_item .item_img {
+	width: 100%;
+	height: 100%;
+}
+.vImgTabs_item .item_img img {
+	width: 100%;
+	height: 100%;
+}
+.vTabsImg_item_active {
+	border: 1px solid #707070;
+}
+
+.vImgTabContent .tab_pane_img {
+	width: 100%;
+	height: 430px;
+	border-radius: 5px;
+}
+.vImgTabContent .tab_pane_img .pane_img {
+	width: 100%;
+	height: 100%;
+}
+.vImgTabContent .tab_pane_img .pane_img img {
+	width: 100%;
+	height: 100%;
+}
+
+@media (max-width: 768px) {
+	.vTabs_nav .vTabs_item {
+		font-size: 16px;
+		font-weight: 500;
+		margin-top: 20px;
+		margin-right: 15px;
+	}
+	.vImgTabs_nav {
+		width: 100%;
+	}
+	.vImgTabs_item {
+		width: 60px;
+		height: 60px;
+		margin-bottom: 0;
+	}
+	.vImgTabContent .tab_pane_img {
+		height: 370px;
+	}
+	.tab_pane_img {
+		margin: 30px 0;
+	}
 }
 </style>

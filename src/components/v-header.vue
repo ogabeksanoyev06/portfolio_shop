@@ -109,6 +109,7 @@
 									class="mobile-item"
 									v-for="(mobile_data, i) in mobile_datas"
 									:key="i"
+									@click="(menuActive = true, btnActive = false)"
 								>
 									<router-link :to="{ name: mobile_data.link }">{{
 										mobile_data.title
