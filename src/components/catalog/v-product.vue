@@ -8,7 +8,7 @@
 						class="vImgTabs d-flex flex-column flex-md-row align-items-center"
 					>
 						<div
-							class="vImgTabs_nav me-2 d-flex flex-row justify-content-between flex-md-column"
+							class="vImgTabs_nav order-md-0 order-1 me-2 d-flex flex-row justify-content-between flex-md-column"
 						>
 							<div
 								class="vImgTabs_item"
@@ -418,6 +418,7 @@ export default {
 	}
 	.vImgTabs_nav {
 		width: 100%;
+		margin-bottom: 20px;
 	}
 	.vImgTabs_item {
 		width: 60px;
@@ -428,7 +429,7 @@ export default {
 		height: 370px;
 	}
 	.tab_pane_img {
-		margin: 30px 0;
+		margin: 20px 0;
 	}
 }
 </style>
