@@ -72,7 +72,7 @@
 								:key="index"
 								@click="
 									selectItem(selectedCategory.name),
-										sortByCategory(selectedCategory.id)
+										sortByCategory(selectedCategory.name)
 								"
 							>
 								{{
@@ -115,13 +115,15 @@ export default {
 			isVisible: false,
 			isVisibleBy: false,
 			categories: [],
-			selectedItem: 'Sort By',
+			selectedItem: 'all',
 			shopByItem: 'Shop By',
 			selectedCategorys: [
-				{ id: 0, name: 'men`s clothing' },
-				{ id: 1, name: 'women`s clothing' },
-				{ id: 2, name: 'jewelerys' },
-				{ id: 3, name: 'electronics' },
+				{ id: 0, name: 'all' },
+				{ id: 1, name: "men's clothing" },
+				{ id: 2, name: "women's clothing" },
+				{ id: 3, name: 'jewelery' },
+				{ id: 4, name: 'electronics' },
+				
 			],
 			shopBys: [{ name: 'payme' }, { name: 'click' }],
 		};
@@ -147,7 +149,7 @@ export default {
 		sortByCategory(category) {
 			this.categories = [];
 			this.PRODUCTS.map(item => {
-				if (item.id === category) {
+				if (item.category === category) {
 					this.categories.push(item);
 				}
 			});
