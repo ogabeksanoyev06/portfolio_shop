@@ -1,14 +1,14 @@
 <template>
 	<div class="v-cart-item">
-		<div class="cart_item_info mb-5">
-			<div
-				class="d-flex flex-md-row flex-column justify-content-between align-items-start"
-			>
-				<div class="d-flex justify-content-between w-0 w-md-100">
-					<div class="cart_item_img">
-						<img src="" :alt="image" />
+		<div class="cart_item_info mb-3">
+			<div class="cart_st">
+				<div class="cx d-flex justify-content-between">
+					<div class="cart_img">
+						<div class="cart_item_img">
+							<img :src="cart_item_data.product.image" :alt="image" />
+						</div>
 					</div>
-					<div class="cart_item_close d-flex d-md-none" @click="removeCartItem">
+					<div class="cart_item_close d-block d-md-none">
 						<svg
 							width="14"
 							height="14"
@@ -25,18 +25,16 @@
 					</div>
 				</div>
 				<div class="cart_item_text mx-0 mx-md-3">
-					<p>ppp</p>
-					<p>sasasas</p>
-					<p>$ 32323</p>
+					<p>{{ cart_item_data.product.title }}</p>
+					<p>{{ cart_item_data.product.description }}</p>
+					<p>$ {{ cart_item_data.product.price }}</p>
 				</div>
 				<div class="quantity mb-md-0 mb-3 me-3">
-					<span style="cursor: pointer" @click="decrementItem">-</span>
-					<span class="mx-1" style="cursor: not-allowed">{{
-						1
-					}}</span>
-					<span style="cursor: pointer" @click="incrementItem">+</span>
+					<span style="cursor: pointer">-</span>
+					<span class="mx-1" style="cursor: not-allowed">{{ cart_item_data.quantity }}</span>
+					<span style="cursor: pointer">+</span>
 				</div>
-				<div class="cart_item_close d-none d-md-flex" @click="removeCartItem">
+				<div class="cart_item_close d-none d-md-block">
 					<svg
 						width="14"
 						height="14"
@@ -58,21 +56,32 @@
 <script>
 export default {
 	name: 'v-cart-item',
-	props: {},
+	props: {
+		cart_item_data: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
 	data() {
 		return {};
 	},
-	computed: {},
+	computed: {
+		
+	},
 	methods: {},
 	mounted() {},
 };
 </script>
 <style scoped>
-.cart_item_img {
-	width: 130px;
-	height: 130px;
+.cart_img {
+	width: 120px;
+	height: 120px;
 }
-.cart_item_img img {
+.cart_item_img {
+	width: 100%;
+	height: 100%;
+}
+.cart_img .cart_item_img img {
 	width: 100%;
 	height: 100%;
 }
@@ -104,10 +113,34 @@ export default {
 	align-items: center;
 	justify-content: center; */
 	cursor: pointer;
+	border: 1pz solid #d8d8d8;
 	/* width: 30px;
 	height: 30px;
 	background-color: #efefef;
 	border-radius: 4px;
 	padding: 5px 10px; */
+}
+.cart_st {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	background: #f8f8fa;
+	border-radius: 5px;
+	padding: 10px;
+}
+@media (max-width: 768px) {
+	.cart_st {
+		flex-direction: column;
+	}
+	.cart_img {
+		margin-bottom: 10px;
+	}
+	.cart_img .cart_item_img img {
+		width: 100%;
+		height: 100%;
+	}
+	.cx {
+		width: 100%;
+	}
 }
 </style>

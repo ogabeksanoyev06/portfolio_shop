@@ -27,11 +27,11 @@
 								<li>
 									<router-link
 										class="d-flex align-items-center justify-content-center"
-										:to="{ name: 'cart', params: { cart_data: CART } }"
+										:to="{ name: 'cart', params: { cart_data: cart } }"
 									>
 										<span class="header__basket-icon">
 											<span class="header__basket-notification">{{
-												CART.length
+												cart.length
 											}}</span>
 											<svg
 												width="21"
@@ -65,11 +65,11 @@
 								<li>
 									<router-link
 										class="d-flex align-items-center justify-content-center"
-										:to="{ name: 'cart', params: { cart_data: CART } }"
+										:to="{ name: 'cart', params: { cart_data: cart } }"
 									>
 										<span class="header__basket-icon">
 											<span class="header__basket-notification">{{
-												CART.length
+												cart.length
 											}}</span>
 											<svg
 												width="21"
@@ -171,7 +171,7 @@ export default {
 		};
 	},
 	computed: {
-		...mapGetters(['ITEMS', 'CART']),
+		...mapGetters(['ITEMS', 'cart']),
 	},
 	methods: {
 		...mapActions(['ITEM_HEADER']),

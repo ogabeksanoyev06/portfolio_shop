@@ -1,6 +1,6 @@
 <template>
 	<div class="v-cart mt-5 container">
-		<div class="d-flex align-items-center justify-content-center container">
+		<div v-if="!cart.length" class="d-flex align-items-center justify-content-center container">
 			<div
 				style="min-height: 80vh"
 				class="d-flex flex-column align-items-center text-center justify-content-center"
@@ -22,10 +22,14 @@
 				</el-button>
 			</div>
 		</div>
-		<p class="cart-title mb-5">Shopping Cart</p>
+		<p class="cart-title mb-5">My Cart</p>
 		<div class="row">
 			<div class="col-md-7">
-				<v-cart-item></v-cart-item>
+				<v-cart-item
+					v-for="(item, i) in cart"
+					:key="i"
+					:cart_item_data="item"
+				></v-cart-item>
 			</div>
 			<div class="col-md-5">dddwdw</div>
 		</div>
@@ -38,16 +42,21 @@ export default {
 	components: {
 		vCartItem,
 	},
+	props: {
+		
+	},
 
 	data() {
 		return {};
 	},
-	computed: {},
+	computed: {
+		cart() {
+			return this.$store.state.cart;
+		},
+	},
 
 	methods: {},
-	mounted() {
-		this.GET_CART_PRODUCT();
-	},
+	mounted() {},
 };
 </script>
 <style scoped>

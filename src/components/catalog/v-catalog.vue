@@ -12,40 +12,7 @@
 							<img src="@/assets/cart-logo/search.png" alt="" />
 						</div>
 					</div>
-					<div class="category_filter mt-3">
-						<div class="selected_item" @click="isVisibleBy = !isVisibleBy">
-							<span>{{
-								shopByItem.slice(0, 1).toUpperCase() + shopByItem.slice(1)
-							}}</span>
-							<svg
-								class="rotate_icon"
-								:class="isVisibleBy ? 'rotate' : ''"
-								width="14"
-								height="8"
-								viewBox="0 0 14 8"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M12.6551 0.103514C12.7208 0.0372643 12.8103 -5.20037e-08 12.9036 -4.7925e-08C12.9969 -4.38464e-08 13.0864 0.0372643 13.1521 0.103514L13.894 0.845401C13.9616 0.908905 14 0.997568 14 1.09036C14 1.18316 13.9616 1.27182 13.894 1.33533L7.46193 7.76735C7.36358 7.86582 7.23016 7.9212 7.09099 7.92133L6.90901 7.92133C6.76984 7.9212 6.63642 7.86582 6.53807 7.76735L0.106047 1.33533C0.0383834 1.27182 9.01957e-07 1.18316 9.06013e-07 1.09036C9.10069e-07 0.997567 0.0383834 0.908904 0.106047 0.8454L0.847934 0.103513C0.913642 0.0372638 1.00309 -5.68113e-07 1.0964 -5.64034e-07C1.18971 -5.59956e-07 1.27915 0.0372638 1.34486 0.103513L7 5.75865L12.6551 0.103514Z"
-									fill="black"
-								/>
-							</svg>
-						</div>
-						<div :class="isVisibleBy ? 'visible' : ''" class="options">
-							<ul>
-								<li
-									v-for="(shopBy, index) in shopBys"
-									:key="index"
-									@click="selectItemBy(shopBy.name)"
-								>
-									{{
-										shopBy.name.slice(0, 1).toUpperCase() + shopBy.name.slice(1)
-									}}
-								</li>
-							</ul>
-						</div>
-					</div>
+					
 					<div class="category_filter mt-3">
 						<div class="selected_item" @click="isVisible = !isVisible">
 							<span>{{
@@ -84,7 +51,7 @@
 							</ul>
 						</div>
 					</div>
-					<div>
+					<div class="filter_price mt-3">
 						<label for="vol">Price (between 0 and 1000):</label>
 						<input type="range" v-model="range" min="0" max="1000" step="10" />
 					</div>
@@ -118,7 +85,6 @@ export default {
 			isVisibleBy: false,
 			categories: [],
 			selectedItem: 'all',
-			shopByItem: 'Shop By',
 			selectedCategorys: [
 				{ id: 0, name: 'all' },
 				{ id: 1, name: "men's clothing" },
@@ -126,7 +92,6 @@ export default {
 				{ id: 3, name: 'jewelery' },
 				{ id: 4, name: 'electronics' },
 			],
-			shopBys: [{ name: 'payme' }, { name: 'click' }],
 		};
 	},
 	computed: {
@@ -146,7 +111,7 @@ export default {
 		},
 	},
 	methods: {
-		...mapActions(['GET_PRODUCTS']),
+		...mapActions(['GET_PRODUCTS','add_to_cart']),
 		sortByCategory(category) {
 			this.categories = [];
 			this.PRODUCTS.map(item => {

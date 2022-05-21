@@ -5,7 +5,11 @@
 				<div class="content_overlay"></div>
 				<div class="content-details">
 					<div class="d-flex align-items-center justify-content-center">
-						<img src="@/assets/cart-logo/shopping-cart 1 (1).png" alt="" />
+						<img
+							src="@/assets/cart-logo/shopping-cart 1 (1).png"
+							alt=""
+							@click="addToCart()"
+						/>
 						<img
 							class="mx-2 mx-md-5"
 							src="@/assets/cart-logo/Group.png"
@@ -44,11 +48,18 @@ export default {
 	data() {
 		return {};
 	},
-	computed: {},
+	computed: {
+		
+	},
 	methods: {
-	
 		titleSlice(text) {
 			return text.slice(0, 15) + '...';
+		},
+		addToCart() {
+			this.$store.dispatch('addToCart', {
+				product: this.product_data,
+				quantity: 1,
+			});
 		},
 	},
 	mounted() {},

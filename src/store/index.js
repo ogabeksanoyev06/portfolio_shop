@@ -1,10 +1,12 @@
 import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+
 	state: {
 		products: [],
 		cart: [],
@@ -21,7 +23,7 @@ export default new Vuex.Store({
 		ITEMS(state) {
 			return state.items;
 		},
-		CART(state) {
+		cart(state) {
 			return state.cart;
 		},
 	},
@@ -32,6 +34,9 @@ export default new Vuex.Store({
 
 		SET_HEADER: (state, items) => {
 			state.items = items;
+		},
+		set_cart_product: (state, { product, quantity }) => {
+			state.cart.push({ product, quantity });
 		},
 
 		DECREMENT: (state, index) => {
@@ -76,10 +81,15 @@ export default new Vuex.Store({
 					return error;
 				});
 		},
-	
+
 		ITEM_HEADER({ commit }, item) {
 			commit('SET_HEADER', item);
 		},
+		addToCart({ commit }, { product, quantity }) {
+			commit('set_cart_product', { product, quantity });
+		},
 	},
 	modules: {},
+	plugins: [createPersistedState()],
+
 });
