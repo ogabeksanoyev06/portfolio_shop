@@ -1,14 +1,17 @@
 <template>
-	<div class="v-cart-item">
+	<div class="v-cart-item" v-if="cart_item_data">
 		<div class="cart_item_info mb-3">
 			<div class="cart_st">
 				<div class="cx d-flex justify-content-between">
 					<div class="cart_img">
 						<div class="cart_item_img">
-							<img :src="cart_item_data.product.image" :alt="image" />
+							<img :src="cart_item_data.product.image" alt="image" />
 						</div>
 					</div>
-					<div class="cart_item_close d-block d-md-none">
+					<div
+						class="cart_item_close d-block d-md-none"
+						@click="removeCart(cart_item_data)"
+					>
 						<svg
 							width="14"
 							height="14"
@@ -26,15 +29,23 @@
 				</div>
 				<div class="cart_item_text mx-0 mx-md-3">
 					<p>{{ cart_item_data.product.title }}</p>
-					<p>{{ cart_item_data.product.description }}</p>
 					<p>$ {{ cart_item_data.product.price }}</p>
 				</div>
 				<div class="quantity mb-md-0 mb-3 me-3">
-					<span style="cursor: pointer">-</span>
-					<span class="mx-1" style="cursor: not-allowed">{{ cart_item_data.quantity }}</span>
-					<span style="cursor: pointer">+</span>
+					<span style="cursor: pointer" @click="decrement(cart_item_data)"
+						>-</span
+					>
+					<span class="mx-1" style="cursor: not-allowed">{{
+						cart_item_data.quantity
+					}}</span>
+					<span style="cursor: pointer" @click="increment(cart_item_data)"
+						>+</span
+					>
 				</div>
-				<div class="cart_item_close d-none d-md-block">
+				<div
+					class="cart_item_close d-none d-md-block"
+					@click="removeCart(cart_item_data)"
+				>
 					<svg
 						width="14"
 						height="14"
@@ -50,6 +61,7 @@
 					</svg>
 				</div>
 			</div>
+			<p>{{ cart_item_data.product.description }}</p>
 		</div>
 	</div>
 </template>
@@ -65,10 +77,19 @@ export default {
 	data() {
 		return {};
 	},
-	computed: {
-		
+	computed: {},
+	methods: {
+		removeCart(product_cart) {
+			this.$store.dispatch('removeCart', product_cart);
+			console.log(product_cart, '45454');
+		},
+		increment(quantity_product) {
+			this.$store.dispatch('increment', quantity_product);
+		},
+		decrement(quantity_product) {
+			this.$store.dispatch('decrement', quantity_product);
+		},
 	},
-	methods: {},
 	mounted() {},
 };
 </script>
@@ -124,10 +145,9 @@ export default {
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
-	background: #f8f8fa;
 	border-radius: 5px;
-	padding: 10px;
 }
+
 @media (max-width: 768px) {
 	.cart_st {
 		flex-direction: column;

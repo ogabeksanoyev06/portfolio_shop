@@ -6,7 +6,6 @@ import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-
 	state: {
 		products: [],
 		cart: [],
@@ -38,16 +37,24 @@ export default new Vuex.Store({
 		set_cart_product: (state, { product, quantity }) => {
 			state.cart.push({ product, quantity });
 		},
-
-		DECREMENT: (state, index) => {
-			if (state.cart[index].quantity > 1) {
-				state.cart[index].quantity--;
-			}
+		remove_cart_product: (state, product_cart) => {
+			state.cart = state.cart.filter(item => {
+				return item.product.id !== product_cart.product.id;
+			});
 		},
-		INCREMENT: (state, index) => {
-			if (state.cart[index].quantity < 20) {
-				state.cart[index].quantity++;
-			}
+		decrement: (state, quantity_cart) => {
+			state.cart.map(item => {
+				if (item.product.id === quantity_cart.product.id) {
+					if (item.quantity > 1) item.quantity--;
+				}
+			});
+		},
+		increment: (state, quantity_cart) => {
+			state.cart.map(item => {
+				if (item.product.id === quantity_cart.product.id) {
+					item.quantity++;
+				}
+			});
 		},
 
 		// SET_CART_PRODUCT: (state, product) => {
@@ -88,8 +95,16 @@ export default new Vuex.Store({
 		addToCart({ commit }, { product, quantity }) {
 			commit('set_cart_product', { product, quantity });
 		},
+		removeCart({ commit }, product_cart) {
+			commit('remove_cart_product', product_cart);
+		},
+		increment({ commit }, quantity_cart) {
+			commit('increment', quantity_cart);
+		},
+		decrement({ commit }, quantity_cart) {
+			commit('decrement', quantity_cart);
+		},
 	},
 	modules: {},
 	plugins: [createPersistedState()],
-
 });

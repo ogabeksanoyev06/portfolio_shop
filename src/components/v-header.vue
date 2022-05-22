@@ -27,7 +27,7 @@
 								<li>
 									<router-link
 										class="d-flex align-items-center justify-content-center"
-										:to="{ name: 'cart', params: { cart_data: cart } }"
+										:to="{ name: 'cart' }"
 									>
 										<span class="header__basket-icon">
 											<span class="header__basket-notification">{{

@@ -90,12 +90,12 @@
 						</p>
 						<div class="d-flex align-items-center justify-content-between mb-5">
 							<div class="quantity">
-								<span style="cursor: pointer" @click="decrementItem">-</span>
+								<span style="cursor: pointer" @click="decrement(product)">-</span>
 								<span class="mx-1" style="cursor: not-allowed">{{ 1 }}</span>
-								<span style="cursor: pointer" @click="incrementItem">+</span>
+								<span style="cursor: pointer" @click="increment(product)">+</span>
 							</div>
 							<div class="cart_btn">
-								<button>ADD TO CART</button>
+								<button @click="addToCart()">ADD TO CART</button>
 							</div>
 						</div>
 						<div class="d-flex align-items-center mb-5 icons">
@@ -457,15 +457,20 @@ export default {
 		isActiveImg(tabImg) {
 			return this.activeTabImg === tabImg;
 		},
-		decrementItem() {
-			if (this.product.quantity > 1) {
-				this.product.quantity--;
-			}
+		
+		increment(quantity_product) {
+			this.$store.dispatch('increment', quantity_product);
+			console.log(quantity_product);
 		},
-		incrementItem() {
-			if (this.product.quantity < 20) {
-				this.product.quantity++;
-			}
+		decrement(quantity_product) {
+			this.$store.dispatch('decrement', quantity_product);
+			console.log(quantity_product);
+		},
+		addToCart() {
+			this.$store.dispatch('addToCart', {
+				product: this.product,
+				quantity: 1,
+			});
 		},
 		newCommet() {
 			const rewiev = {
@@ -650,7 +655,7 @@ export default {
 	color: #707070;
 	font-weight: 400;
 }
-@media (min-width: 768px)  {
+@media (min-width: 768px) {
 	.rewievs_item {
 		position: sticky;
 		top: 150px;
@@ -659,8 +664,8 @@ export default {
 }
 @media (max-width: 768px) {
 	.vImgTabContent .tab_pane_img {
-	height: 330px;
-}
+		height: 330px;
+	}
 	.hr {
 		margin-bottom: 20px;
 	}
