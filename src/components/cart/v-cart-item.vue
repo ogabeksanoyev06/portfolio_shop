@@ -97,6 +97,8 @@ export default {
 .cart_img {
 	width: 120px;
 	height: 120px;
+	background-color: #fff;
+	box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4)
 }
 .cart_item_img {
 	width: 100%;

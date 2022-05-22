@@ -22,9 +22,7 @@ export default {
 	padding: 10px 15px;
 	min-width: 100px;
 }
-svg:hover path {
-	fill: #000000;
-}
+
 
 #app {
 	@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
