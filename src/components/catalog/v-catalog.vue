@@ -12,7 +12,7 @@
 							<img src="@/assets/cart-logo/search.png" alt="" />
 						</div>
 					</div>
-					
+
 					<div class="category_filter mt-3">
 						<div class="selected_item" @click="isVisible = !isVisible">
 							<span>{{
@@ -102,16 +102,10 @@ export default {
 			} else {
 				return this.PRODUCTS;
 			}
-			// return this.PRODUCTS.filter(
-			// 	product => !product.category.indexOf(this.category)
-			// );
-			// return this.PRODUCTS.filter(product =>
-			// 	product.price > 0 && product.price < this.range ? product : ''
-			// );
 		},
 	},
 	methods: {
-		...mapActions(['GET_PRODUCTS','add_to_cart']),
+		...mapActions(['GET_PRODUCTS', 'add_to_cart']),
 		sortByCategory(category) {
 			this.categories = [];
 			this.PRODUCTS.map(item => {
@@ -135,8 +129,6 @@ export default {
 };
 </script>
 <style scoped>
-.v-catalog {
-}
 .v-catalog .title {
 	font-style: normal;
 	font-weight: 500;

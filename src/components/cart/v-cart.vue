@@ -51,7 +51,7 @@
 				<p class="total_cart">Cart totals</p>
 				<div class="d-flex justify-content-between">
 					<p class="total_title">Subtotal</p>
-					<p class="total_price">$ 65.00</p>
+					<p class="total_price">$ {{subTotal}} </p>
 				</div>
 				<div class="d-flex justify-content-between">
 					<p class="total_title">Shipping</p>
@@ -74,7 +74,7 @@
 				<hr class="mt-4 mb-5" />
 				<div class="d-flex justify-content-between">
 					<p class="total_title fw-bold">TOTAL</p>
-					<p class="total_price fw-bold">$ 87.00</p>
+					<p class="total_price fw-bold">$  </p>
 				</div>
 				<button class="btn_submit" style="max-width:100%">PROCEED TO CHECKOUT</button>
 			</div>
@@ -97,6 +97,11 @@ export default {
 		cart() {
 			return this.$store.state.cart;
 		},
+		subTotal(){
+			return this.$store.getters.cartTotalPrice;
+		}
+		
+		
 	},
 
 	methods: {},

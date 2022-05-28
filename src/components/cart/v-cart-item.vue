@@ -81,7 +81,7 @@ export default {
 	methods: {
 		removeCart(product_cart) {
 			this.$store.dispatch('removeCart', product_cart);
-			console.log(product_cart, '45454');
+			console.log(product_cart);
 		},
 		increment(quantity_product) {
 			this.$store.dispatch('increment', quantity_product);

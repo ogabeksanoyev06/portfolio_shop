@@ -25,6 +25,13 @@ export default new Vuex.Store({
 		cart(state) {
 			return state.cart;
 		},
+		cartTotalPrice(state) {
+			let total = 0;
+			state.cart.forEach(item => {
+				total += item.product.price * item.quantity;
+			});
+			return total;
+		},
 	},
 	mutations: {
 		SET_PRODUCTS: (state, products) => {
@@ -35,6 +42,13 @@ export default new Vuex.Store({
 			state.items = items;
 		},
 		set_cart_product: (state, { product, quantity }) => {
+			let productInCart = state.cart.find(item => {
+				return item.product.id === product.id;
+			});
+			if (productInCart) {
+				productInCart.quantity += quantity;
+				return;
+			}
 			state.cart.push({ product, quantity });
 		},
 		remove_cart_product: (state, product_cart) => {
@@ -56,23 +70,6 @@ export default new Vuex.Store({
 				}
 			});
 		},
-
-		// SET_CART_PRODUCT: (state, product) => {
-		// 	if (state.cart.length) {
-		// 		let isProductExists = false;
-		// 		state.cart.map(item => {
-		// 			if (item.title === product.title) {
-		// 				isProductExists = true;
-		// 				item.quantity += 1;
-		// 			}
-		// 		});
-		// 		if (!isProductExists) {
-		// 			state.cart.push(product);
-		// 		}
-		// 	} else {
-		// 		state.cart.push(product);
-		// 	}
-		// },
 	},
 	actions: {
 		GET_PRODUCTS({ commit }) {
@@ -95,6 +92,7 @@ export default new Vuex.Store({
 		addToCart({ commit }, { product, quantity }) {
 			commit('set_cart_product', { product, quantity });
 		},
+	
 		removeCart({ commit }, product_cart) {
 			commit('remove_cart_product', product_cart);
 		},

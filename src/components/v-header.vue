@@ -1,5 +1,5 @@
 <template>
-	<div style="min-height: 60px">
+	<div style="min-height: 70px">
 		<div class="v-headerX">
 			<div class="container">
 				<div class="v-header w-100">
@@ -246,7 +246,7 @@ export default {
 	left: 0;
 	width: 100%;
 	z-index: 9999;
-	min-height: 60px;
+	min-height: 70px;
 }
 .v-header-logo {
 	max-width: 200px;
@@ -264,8 +264,8 @@ export default {
 	animation-name: logo;
 }
 .v-header {
-	height: 60px;
-	line-height: 60px;
+	height: 70px;
+	line-height: 70px;
 	display: flex;
 	align-items: center;
 }

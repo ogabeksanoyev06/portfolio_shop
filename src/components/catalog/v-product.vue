@@ -91,15 +91,11 @@
 							{{ product.description }}
 						</p>
 						<div class="d-flex align-items-center justify-content-between mb-5">
-							<div class="quantity">
-								<span style="cursor: pointer" @click="decrement(product)"
-									>-</span
-								>
+							<!-- <div class="quantity">
+								<span style="cursor: pointer">-</span>
 								<span class="mx-1" style="cursor: not-allowed">{{ 1 }}</span>
-								<span style="cursor: pointer" @click="increment(product)"
-									>+</span
-								>
-							</div>
+								<span style="cursor: pointer">+</span>
+							</div> -->
 							<div class="cart_btn">
 								<button @click="addToCart()">ADD TO CART</button>
 							</div>
@@ -446,7 +442,7 @@ export default {
 		axios
 			.get(`https://fakestoreapi.com/products/${this.$route.params.id}`)
 			.then(res => {
-				this.product = res.data;
+				this.product = res.data,
 				this.loading = false;
 			});
 	},
@@ -464,14 +460,6 @@ export default {
 			return this.activeTabImg === tabImg;
 		},
 
-		increment(quantity_product) {
-			this.$store.dispatch('increment', quantity_product);
-			console.log(quantity_product);
-		},
-		decrement(quantity_product) {
-			this.$store.dispatch('decrement', quantity_product);
-			console.log(quantity_product);
-		},
 		addToCart() {
 			this.$store.dispatch('addToCart', {
 				product: this.product,
@@ -495,6 +483,12 @@ export default {
 		removeCommet(index) {
 			this.rewievs.splice(index, 1);
 			localStorage.setItem('rewievs', JSON.stringify(this.rewievs));
+		},
+		increment(quantity_product) {
+			this.$store.dispatch('increment', quantity_product);
+		},
+		decrement(quantity_product) {
+			this.$store.dispatch('decrement', quantity_product);
 		},
 	},
 	async mounted() {

@@ -2,10 +2,10 @@
 	<div class="v-home">
 		<div class="container">
 			<!-- carusel reklama -->
-			<div class="mt-2">
+			<div class="mt-5">
 				<el-carousel :interval="5000" arrow="always">
 					<el-carousel-item v-for="(item, i) in image" :key="i">
-						<img :src="item.url" alt="" />
+						<img class="img-fluid" :src="item.url" alt="" />
 					</el-carousel-item>
 				</el-carousel>
 			</div>
@@ -65,9 +65,9 @@ export default {
 	data() {
 		return {
 			image: [
-				{ id: 0, url: 'http://omborxona.uz/storage/banners/ru2.jpg' },
-				{ id: 1, url: 'http://omborxona.uz/storage/banners/ru3.jpg' },
-				{ id: 2, url: 'http://omborxona.uz/storage/banners/ru1.jpg' },
+				{ id: 0, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
+				{ id: 1, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
+				{ id: 2, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
 			],
 			indexBlock: [
 				{
@@ -155,11 +155,9 @@ export default {
 </script>
 <style>
 .el-carousel__item img {
-	width: 100%;
 	height: 100%;
-}
-.el-carousel__container {
-	height: 400px !important;
+	width:100%;
+	border-radius: .28rem!important;
 }
 .block_card {
 	display: flex;

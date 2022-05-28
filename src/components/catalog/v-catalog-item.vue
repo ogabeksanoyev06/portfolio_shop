@@ -60,8 +60,9 @@ export default {
 				product: this.product_data,
 				quantity: 1,
 			});
-			console.log(this.product_data);
-		},
+			},
+		
+		
 
 	},
 	mounted() {},
