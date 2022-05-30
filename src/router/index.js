@@ -30,11 +30,26 @@ const routes = [
 		component: () => import('@/components/catalog/v-product.vue'),
 	},
 	{
+		path: '/shop/cart/checkout',
+		name: 'vCheckout',
+		component: () => import('@/components/v-checkout.vue'),
+	},
+	{
+		path: '/shop/cart/order',
+		name: 'vOrder',
+		component: () => import('@/components/v-order.vue'),
+	},
+	{
+		path: '/my-account',
+		name: 'vAccount',
+		component: () => import('@/components/v-account.vue'),
+	},
+	{
 		path: '/shop/cart',
 		name: 'cart',
 		component: () => import('@/components/cart/v-cart.vue'),
 		props: true,
-	}
+	},
 ];
 
 const router = new VueRouter({

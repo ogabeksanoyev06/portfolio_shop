@@ -41,15 +41,13 @@
 				<div class="abt_us_items row">
 					<div
 						class="abt-us_item mb-3 col-12 col-md-4 d-flex flex-column align-items-center"
-						v-for="item in abtUs" :key="item.id"
+						v-for="item in abtUs"
+						:key="item.id"
 					>
-						<img
-							:src="require('@/assets/logo/' + item.img)"
-							alt=""
-						/>
-						<h5 class="fw-bolder">{{item.title}}</h5>
+						<img :src="require('@/assets/logo/' + item.img)" alt="" />
+						<h5 class="fw-bolder">{{ item.title }}</h5>
 						<p>
-							{{item.text}}
+							{{ item.text }}
 						</p>
 					</div>
 				</div>
@@ -62,12 +60,22 @@ export default {
 	name: 'v-home',
 	components: {},
 	props: {},
+
 	data() {
 		return {
 			image: [
-				{ id: 0, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
-				{ id: 1, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
-				{ id: 2, url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19' },
+				{
+					id: 0,
+					url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19',
+				},
+				{
+					id: 1,
+					url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19',
+				},
+				{
+					id: 2,
+					url: 'https://storage2.alifshop.uz/files?k1=c4cdd7f3-bd5d-446e-af4f-5d274017c7b4&k2=8dae7e063b31e26e32f0aac46cc1eeca36a630578040b3e55b06a91a01fdb57316731bb5e85b14c4632f90e3bd84ae746f8a3ae781f9e7626c5bc4f52051bc19',
+				},
 			],
 			indexBlock: [
 				{
@@ -89,12 +97,12 @@ export default {
 					img: '3.png',
 				},
 			],
-			abtUs:[
+			abtUs: [
 				{
 					id: 0,
 					title: 'Boy assortiment',
 					text: 'In terms of the abundance of assortment, our online store is in no way inferior to large supermarkets.',
-					img: '4.png'
+					img: '4.png',
 				},
 				{
 					id: 1,
@@ -144,8 +152,7 @@ export default {
 					text: 'Convenient catalog, where it is easy to choose and pleasant to buy!',
 					img: '12.png',
 				},
-				
-				]
+			],
 		};
 	},
 	computed: {},
@@ -156,8 +163,8 @@ export default {
 <style>
 .el-carousel__item img {
 	height: 100%;
-	width:100%;
-	border-radius: .28rem!important;
+	width: 100%;
+	border-radius: 0.28rem !important;
 }
 .block_card {
 	display: flex;
@@ -187,9 +194,9 @@ export default {
 	width: 100%;
 }
 .abt-us_item img {
-    height: 70px;
+	height: 70px;
 }
-.abt-us_item h5{
+.abt-us_item h5 {
 	font-size: 20px;
 	font-weight: 700;
 	color: #040507;
@@ -197,7 +204,7 @@ export default {
 	font-family: 'utk';
 	text-align: center;
 }
-.abt-us_item p{
+.abt-us_item p {
 	font-size: 14px;
 	color: #040507;
 	font-family: 'utk';

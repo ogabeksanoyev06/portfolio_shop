@@ -25,9 +25,9 @@
 				</el-button>
 			</div>
 		</div>
-		<p class="cart-title mb-5">My Cart</p>
-		<div class="row">
-			<div class="col-md-6 ">
+		<p class="cart-title mb-5" v-if="cart.length">My Cart</p>
+		<div class="row" v-if="cart.length">
+			<div class="col-md-6">
 				<div>
 					<v-cart-item
 						v-for="(item, i) in cart"
@@ -51,7 +51,7 @@
 				<p class="total_cart">Cart totals</p>
 				<div class="d-flex justify-content-between">
 					<p class="total_title">Subtotal</p>
-					<p class="total_price">$ {{subTotal}} </p>
+					<p class="total_price">$ {{ subTotal }}</p>
 				</div>
 				<div class="d-flex justify-content-between">
 					<p class="total_title">Shipping</p>
@@ -74,9 +74,13 @@
 				<hr class="mt-4 mb-5" />
 				<div class="d-flex justify-content-between">
 					<p class="total_title fw-bold">TOTAL</p>
-					<p class="total_price fw-bold">$  </p>
+					<p class="total_price fw-bold">$</p>
 				</div>
-				<button class="btn_submit" style="max-width:100%">PROCEED TO CHECKOUT</button>
+				<router-link
+					class="btn_submit d-block text-center"
+					:to="{ name: 'vCheckout' }"
+					>PROCEED TO CHECKOUT
+				</router-link>
 			</div>
 		</div>
 	</div>
@@ -97,11 +101,9 @@ export default {
 		cart() {
 			return this.$store.state.cart;
 		},
-		subTotal(){
+		subTotal() {
 			return this.$store.getters.cartTotalPrice;
-		}
-		
-		
+		},
 	},
 
 	methods: {},
@@ -115,30 +117,7 @@ export default {
 	font-weight: 500;
 	font-size: 33px;
 }
-.btn_submit_outline {
-	background: #fff;
-	border: 1px solid #000000;
-	color: #000;
-	font-weight: 500;
-	font-size: 15px;
-	text-transform: uppercase;
-	line-height: 21px;
-	border-radius: 4px;
-	padding: 10px;
-	margin-top: 20px;
-}
-.btn_submit {
-	background: #000;
-	border: 1px solid #000000;
-	color: #fff;
-	font-weight: 400;
-	font-size: 15px;
-	text-transform: uppercase;
-	line-height: 21px;
-	border-radius: 4px;
-	padding: 10px;
-	margin-top: 20px;
-}
+
 .form_group input {
 	outline: none;
 	border: none;

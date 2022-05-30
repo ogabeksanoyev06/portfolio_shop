@@ -96,7 +96,7 @@
 								<span class="mx-1" style="cursor: not-allowed">{{ 1 }}</span>
 								<span style="cursor: pointer">+</span>
 							</div> -->
-							<div class="cart_btn">
+							<div class="cart_btn mt-3">
 								<button @click="addToCart()">ADD TO CART</button>
 							</div>
 						</div>
